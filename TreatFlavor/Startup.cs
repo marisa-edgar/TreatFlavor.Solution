@@ -19,10 +19,10 @@ namespace TreatFlavor {
     public void ConfigureServices(IServiceCollection services) {
       services.AddMvc();
       services.AddEntityFrameworkMySql()
-        .AddDbContext<TreatFlavorContext>(options => options
+        .AddDbContext<FlavorTreatContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
       services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<TreatFlavorContext>()
+        .AddEntityFrameworkStores<FlavorTreatContext>()
         .AddDefaultTokenProviders();
         
 // DEVELOPMENT USE ONLY - Never use in production environment

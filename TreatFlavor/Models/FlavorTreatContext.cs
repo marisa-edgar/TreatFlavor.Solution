@@ -7,7 +7,7 @@ namespace TreatFlavor.Models
     {
       public DbSet<Flavor> Flavors { get; set; }
       public DbSet<Treat> Treats { get; set; }
-      public DbSet<FlavorTreat> FlavorItem { get; set; }
+      public DbSet<FlavorTreat> FlavorTreat { get; set; }
 
       public FlavorTreatContext(DbContextOptions options) : base(options) { }
 
