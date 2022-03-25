@@ -8,9 +8,9 @@ namespace TreatFlavor.Controllers
 {
   public class FlavorsController : Controller
   {
-    private readonly TreatFlavorContext _db;
+    private readonly FlavorTreatContext _db;
 
-    public FlavorsController(TreatFlavorContext db)
+    public FlavorsController(FlavorTreatContext db)
     {
       _db = db;
     }

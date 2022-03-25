@@ -14,10 +14,10 @@ namespace TreatFlavor.Controllers
   [Authorize]
   public class TreatsController : Controller
   {
-    private readonly TreatFlavorContext _db;
+    private readonly FlavorTreatContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(UserManager<ApplicationUser> userManager, TreatFlavorContext db)
+    public TreatsController(UserManager<ApplicationUser> userManager, FlavorTreatContext db)
     {
       _userManager = userManager;
       _db = db;
@@ -43,7 +43,7 @@ namespace TreatFlavor.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       treat.User = currentUser;
-      _db.Treats.Add(Treat);
+      _db.Treats.Add(treat);
       _db.SaveChanges();
       if (FlavorId != 0)
       {

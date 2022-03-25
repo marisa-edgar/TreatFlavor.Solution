@@ -8,11 +8,11 @@ namespace TreatFlavor.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly TreatFlavorContext _db;
+        private readonly FlavorTreatContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, TreatFlavorContext db)
+        public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, FlavorTreatContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
