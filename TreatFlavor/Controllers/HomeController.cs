@@ -22,6 +22,11 @@ namespace TreatFlavor.Controllers
       {
         return View();
       }
+
+      public ActionResult About()
+      {
+        return View();
+      }
     public ActionResult Search(string Search)
     {
       var treats = _db.Treats.Where(treat => (treat.Name.Contains(Search) || (treat.Name == Search))).ToList();
