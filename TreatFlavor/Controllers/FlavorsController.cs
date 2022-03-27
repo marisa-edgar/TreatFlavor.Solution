@@ -1,11 +1,18 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using TreatFlavor.Models;
+
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using TreatFlavor.Models;
 
 namespace TreatFlavor.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly FlavorTreatContext _db;
@@ -14,7 +21,7 @@ namespace TreatFlavor.Controllers
     {
       _db = db;
     }
-
+    [AllowAnonymous]
     public ActionResult Index()
     {
       List<Flavor> model = _db.Flavors.ToList();
@@ -33,7 +40,8 @@ namespace TreatFlavor.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors

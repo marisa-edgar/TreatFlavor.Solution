@@ -23,12 +23,15 @@ namespace TreatFlavor.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    [AllowAnonymous]
+    public ActionResult Index()
     {
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
-      return View(userTreats);
+      // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      // var currentUser = await _userManager.FindByIdAsync(userId);
+      // var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      // return View(userTreats);
+      List<Treat> model = _db.Treats.ToList();
+      return View(model);
     }
 
     public ActionResult Create()
@@ -53,12 +56,13 @@ namespace TreatFlavor.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisTreat = _db.Treats
-          .Include(treat => treat.JoinEntities)
-          .ThenInclude(join => join.Flavor)
-          .FirstOrDefault(treat => treat.TreatId == id);
+      .Include(treat => treat.JoinEntities)
+      .ThenInclude(join => join.Flavor)
+      .FirstOrDefault(treat => treat.TreatId == id);
       return View(thisTreat);
     }
 

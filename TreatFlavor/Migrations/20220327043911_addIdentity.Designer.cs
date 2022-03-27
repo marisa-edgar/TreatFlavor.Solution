@@ -9,7 +9,7 @@ using TreatFlavor.Models;
 namespace TreatFlavor.Migrations
 {
     [DbContext(typeof(FlavorTreatContext))]
-    [Migration("20220325230423_addIdentity")]
+    [Migration("20220327043911_addIdentity")]
     partial class addIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -220,7 +220,12 @@ namespace TreatFlavor.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.HasKey("FlavorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Flavors");
                 });
@@ -252,16 +257,13 @@ namespace TreatFlavor.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Allergens")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Price")
+                    b.Property<string>("Search")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UserId")
@@ -323,6 +325,15 @@ namespace TreatFlavor.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TreatFlavor.Models.Flavor", b =>
+                {
+                    b.HasOne("TreatFlavor.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TreatFlavor.Models.FlavorTreat", b =>
